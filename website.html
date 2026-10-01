@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google AI Student Summit 2026 | Registration</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        google: {
+                            blue: '#4285F4',
+                            red: '#EA4335',
+                            yellow: '#FBBC05',
+                            green: '#34A853',
+                            dark: '#0f172a'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
+                    },
+                    animation: {
+                        'pulse-glow': 'pulseGlow 3s infinite alternate',
+                        'float': 'float 4s ease-in-out infinite',
+                        'shimmer': 'shimmer 2.5s infinite linear',
+                        'spin-slow': 'spin 12s linear infinite'
+                    },
+                    keyframes: {
+                        pulseGlow: {
+                            '0%': { boxShadow: '0 0 15px rgba(66, 133, 244, 0.4)' },
+                            '100%': { boxShadow: '0 0 35px rgba(234, 67, 53, 0.7), 0 0 20px rgba(52, 168, 83, 0.5)' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        },
+                        shimmer: {
+                            '0%': { backgroundPosition: '-200% 0' },
+                            '100%': { backgroundPosition: '200% 0' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome & Canvas Confetti -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #090d16;
+            color: #f1f5f9;
+            overflow-x: hidden;
+        }
+
+        /* Glassmorphism styling */
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .glass-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.02) 100%);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        /* Google AI Metallic Gradient Borders */
+        .google-gradient-text {
+            background: linear-gradient(135deg, #4285F4 0%, #EA4335 33%, #FBBC05 66%, #34A853 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .google-gradient-bg {
+            background: linear-gradient(135deg, #4285F4 0%, #EA4335 33%, #FBBC05 66%, #34A853 100%);
+        }
+
+        .google-border-glow {
+            position: relative;
+        }
+        .google-border-glow::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(135deg, #4285F4, #EA4335, #FBBC05, #34A853);
+            border-radius: inherit;
+            z-index: -1;
+            opacity: 0.7;
+            filter: blur(8px);
+            transition: opacity 0.3s ease;
+        }
+        .google-border-glow:hover::before {
+            opacity: 1;
+            filter: blur(12px);
+        }
+
+        /* Dynamic Ticket Hologram Effect */
+        .ticket-card {
+            background: radial-gradient(circle at 10% 20%, rgba(66, 133, 244, 0.25) 0%, rgba(15, 23, 42, 0.9) 80%);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #090d16;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4285F4;
+        }
+    </style>
+</head>
+<body class="relative min-h-screen text-slate-100 selection:bg-google-blue selection:text-white">
+
+    <!-- Dynamic AI Neural Canvas Background -->
+    <canvas id="bgCanvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0 opacity-40"></canvas>
+
+    <!-- Floating Vibrant Glow Elements -->
+    <div class="fixed top-1/4 left-10 w-96 h-96 bg-google-blue/20 rounded-full blur-3xl pointer-events-none animate-pulse-glow z-0"></div>
+    <div class="fixed bottom-1/3 right-10 w-96 h-96 bg-google-red/20 rounded-full blur-3xl pointer-events-none animate-pulse-glow z-0" style="animation-delay: 1s;"></div>
+    <div class="fixed bottom-10 left-1/3 w-80 h-80 bg-google-green/15 rounded-full blur-3xl pointer-events-none animate-pulse-glow z-0" style="animation-delay: 2s;"></div>
+
+    <!-- MAIN APP CONTAINER -->
+    <div class="relative z-10 flex flex-col min-h-screen">
+
+        <!-- HEADER / NAVIGATION -->
+        <header class="sticky top-0 z-50 glass-panel border-b border-slate-800/80 px-4 lg:px-8 py-3.5 transition-all">
+            <div class="max-w-7xl mx-auto flex items-center justify-between">
+                <!-- Brand Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="relative w-10 h-10 rounded-xl bg-slate-900 border border-slate-700/80 flex items-center justify-center overflow-hidden shadow-lg group-hover:scale-105 transition-transform">
+                        <div class="absolute inset-0 google-gradient-bg opacity-20 group-hover:opacity-40 transition-opacity"></div>
+                        <i class="fa-solid fa-sparkles text-xl text-google-yellow"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="font-extrabold text-xl tracking-tight">Google <span class="google-gradient-text">AI Event</span></span>
+                            <span class="text-[10px] uppercase font-mono px-2 py-0.5 rounded-full bg-google-blue/20 text-google-blue font-bold border border-google-blue/30">2026</span>
+                        </div>
+                        <p class="text-xs text-slate-400 font-mono hidden sm:block">Campus Student Innovators Summit</p>
+                    </div>
+                </a>
+
+                <!-- Navigation Quick Links -->
+                <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+                    <a href="#about" class="text-slate-300 hover:text-google-blue transition-colors">Overview</a>
+                    <a href="#register" class="text-slate-300 hover:text-google-blue transition-colors">Register</a>
+                    <a href="#tracks" class="text-slate-300 hover:text-google-blue transition-colors">AI Tracks</a>
+                    <a href="#schedule" class="text-slate-300 hover:text-google-blue transition-colors">Schedule</a>
+                    <a href="#faq" class="text-slate-300 hover:text-google-blue transition-colors">FAQ</a>
+                </nav>
+
+                <!-- Action Button & Live Count -->
+                <div class="flex items-center gap-3">
+                    <div class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900/80 border border-slate-700/60 text-xs font-mono">
+                        <span class="w-2 h-2 rounded-full bg-google-green animate-ping"></span>
+                        <span class="text-slate-400">Seats Left:</span>
+                        <span id="seatsCounter" class="text-google-yellow font-bold">142 / 500</span>
+                    </div>
+                    <a href="#register" class="px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold text-white google-gradient-bg hover:shadow-lg hover:shadow-google-blue/20 hover:scale-[1.02] active:scale-95 transition-all flex items-center gap-2">
+                        <span>Register Now</span>
+                        <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- HERO SECTION -->
+        <section id="about" class="relative pt-12 pb-16 px-4 lg:px-8 max-w-7xl mx-auto w-full">
+            <div class="text-center max-w-4xl mx-auto space-y-6">
+                <!-- Badge Banner -->
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border border-slate-700/50 text-xs sm:text-sm font-medium animate-float">
+                    <span class="flex h-2 w-2 rounded-full bg-google-red"></span>
+                    <span class="text-slate-300">Google Developer Student Clubs Presents</span>
+                    <span class="text-slate-500">•</span>
+                    <span class="text-google-yellow font-bold flex items-center gap-1">
+                        <i class="fa-solid fa-graduation-cap"></i> Exclusively for Students
+                    </span>
+                </div>
+
+                <!-- Main Catchy Title -->
+                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-none">
+                    Unleash Next-Gen <br class="hidden sm:inline"/>
+                    <span class="google-gradient-text">Artificial Intelligence</span>
+                </h1>
+
+                <!-- Subtitle -->
+                <p class="text-lg sm:text-xl text-slate-300 max-w-2xl mx-auto font-light leading-relaxed">
+                    Join university visionaries for a 1-day immersive Google AI experience. Hands-on coding with <span class="text-google-blue font-semibold">Gemini 1.5 Pro</span>, <span class="text-google-green font-semibold">Vertex AI</span>, swags, hackathon challenges & direct Google Developer mentorship!
+                </p>
+
+                <!-- Countdown Timer Widget -->
+                <div class="pt-4 flex flex-wrap justify-center gap-3 sm:gap-6 font-mono">
+                    <div class="glass-card px-4 py-3 rounded-2xl min-w-[80px] text-center border-t-2 border-google-blue">
+                        <div id="cd-days" class="text-2xl sm:text-3xl font-bold text-white">08</div>
+                        <div class="text-[10px] uppercase tracking-wider text-slate-400 mt-0.5">Days</div>
+                    </div>
+                    <div class="glass-card px-4 py-3 rounded-2xl min-w-[80px] text-center border-t-2 border-google-red">
+                        <div id="cd-hours" class="text-2xl sm:text-3xl font-bold text-white">14</div>
+                        <div class="text-[10px] uppercase tracking-wider text-slate-400 mt-0.5">Hours</div>
+                    </div>
+                    <div class="glass-card px-4 py-3 rounded-2xl min-w-[80px] text-center border-t-2 border-google-yellow">
+                        <div id="cd-mins" class="text-2xl sm:text-3xl font-bold text-white">32</div>
+                        <div class="text-[10px] uppercase tracking-wider text-slate-400 mt-0.5">Mins</div>
+                    </div>
+                    <div class="glass-card px-4 py-3 rounded-2xl min-w-[80px] text-center border-t-2 border-google-green">
+                        <div id="cd-secs" class="text-2xl sm:text-3xl font-bold text-white">45</div>
+                        <div class="text-[10px] uppercase tracking-wider text-slate-400 mt-0.5">Secs</div>
+                    </div>
+                </div>
+
+                <!-- Feature Pill Tags -->
+                <div class="pt-2 flex flex-wrap justify-center gap-3 text-xs text-slate-300 font-medium">
+                    <span class="px-3 py-1.5 rounded-lg bg-slate-900/90 border border-slate-800 flex items-center gap-2">
+                        <i class="fa-solid fa-gift text-google-yellow"></i> Exclusive Google AI Swags
+                    </span>
+                    <span class="px-3 py-1.5 rounded-lg bg-slate-900/90 border border-slate-800 flex items-center gap-2">
+                        <i class="fa-solid fa-certificate text-google-blue"></i> Official Certificate
+                    </span>
+                    <span class="px-3 py-1.5 rounded-lg bg-slate-900/90 border border-slate-800 flex items-center gap-2">
+                        <i class="fa-solid fa-utensils text-google-green"></i> Free Food & Drinks
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <!-- MAIN REGISTRATION SECTION -->
+        <section id="register" class="py-12 px-4 lg:px-8 max-w-7xl mx-auto w-full scroll-mt-20">
+            <div class="text-center mb-10">
+                <span class="text-xs font-mono font-bold tracking-widest text-google-blue uppercase">Instant Pass Generation</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold mt-1">Student Registration Hub</h2>
+                <p class="text-slate-400 text-sm mt-2">Fill in your details below to lock your seat and generate your digital holographic event pass.</p>
+            </div>
+
+            <!-- Two Column Layout: Form Left, Interactive Live Pass Right -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+                <!-- REGISTRATION FORM CONTAINER (Col 7) -->
+                <div class="lg:col-span-7 glass-panel rounded-3xl p-6 sm:p-8 border border-slate-700/70 shadow-2xl relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-1.5 google-gradient-bg"></div>
+                    
+                    <form id="registrationForm" class="space-y-6" onsubmit="handleRegistration(event)">
+                        
+                        <!-- Form Header -->
+                        <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+                            <h3 class="text-lg font-bold flex items-center gap-2 text-white">
+                                <i class="fa-solid fa-id-card text-google-blue"></i>
+                                Required Student Credentials
+                            </h3>
+                            <span class="text-xs text-slate-400 font-mono">* All fields required</span>
+                        </div>
+
+                        <!-- Grid 1: Name & ID No -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            
+                            <!-- 1. Name -->
+                            <div class="space-y-2">
+                                <label for="fullName" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider">
+                                    Full Name <span class="text-google-red">*</span>
+                                </label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                                        <i class="fa-solid fa-user text-sm"></i>
+                                    </div>
+                                    <input 
+                                        type="text" 
+                                        id="fullName" 
+                                        required 
+                                        placeholder="e.g. Alex Morgan" 
+                                        class="w-full pl-10 pr-4 py-3 bg-slate-900/90 border border-slate-700 rounded-xl focus:ring-2 focus:ring-google-blue focus:border-google-blue outline-none text-slate-100 text-sm placeholder:text-slate-500 transition-all"
+                                        oninput="updateTicketPreview()"
+                                    >
+                                </div>
+                            </div>
+
+                            <!-- 2. Student ID No -->
+                            <div class="space-y-2">
+                                <label for="studentId" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider">
+                                    Student ID No. <span class="text-google-red">*</span>
+                                </label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                                        <i class="fa-solid fa-hashtag text-sm"></i>
+                                    </div>
+                                    <input 
+                                        type="text" 
+                                        id="studentId" 
+                                        required 
+                                        placeholder="e.g. 2024-CS-0891" 
+                                        class="w-full pl-10 pr-4 py-3 bg-slate-900/90 border border-slate-700 rounded-xl focus:ring-2 focus:ring-google-blue focus:border-google-blue outline-none text-slate-100 text-sm font-mono placeholder:text-slate-500 transition-all uppercase"
+                                        oninput="updateTicketPreview()"
+                                    >
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Grid 2: Department & College Year -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+
+                            <!-- 3. Department -->
+                            <div class="space-y-2">
+                                <label for="department" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider">
+                                    Department <span class="text-google-red">*</span>
+                                </label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                                        <i class="fa-solid fa-laptop-code text-sm"></i>
+                                    </div>
+                                    <select 
+                                        id="department" 
+                                        required 
+                                        class="w-full pl-10 pr-4 py-3 bg-slate-900/90 border border-slate-700 rounded-xl focus:ring-2 focus:ring-google-blue focus:border-google-blue outline-none text-slate-100 text-sm transition-all appearance-none cursor-pointer"
+                                        onchange="updateTicketPreview()"
+                                    >
+                                        <option value="" disabled selected>Select Department</option>
+                                        <option value="Computer Science & Eng.">Computer Science & Eng.</option>
+                                        <option value="AI & Data Science">AI & Data Science</option>
+                                        <option value="Information Technology">Information Technology</option>
+                                        <option value="Electronics & Comm.">Electronics & Comm.</option>
+                                        <option value="Electrical Engineering">Electrical Engineering</option>
+                                        <option value="Mechanical Engineering">Mechanical Engineering</option>
+                                        <option value="Biotechnology / Other">Biotechnology / Other</option>
+                                    </select>
+                                    <div class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-slate-400">
+                                        <i class="fa-solid fa-chevron-down text-xs"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 4. Year of College -->
+                            <div class="space-y-2">
+                                <label for="collegeYear" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider">
+                                    Year of College <span class="text-google-red">*</span>
+                                </label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                                        <i class="fa-solid fa-graduation-cap text-sm"></i>
+                                    </div>
+                                    <select 
+                                        id="collegeYear" 
+                                        required 
+                                        class="w-full pl-10 pr-4 py-3 bg-slate-900/90 border border-slate-700 rounded-xl focus:ring-2 focus:ring-google-blue focus:border-google-blue outline-none text-slate-100 text-sm transition-all appearance-none cursor-pointer"
+                                        onchange="updateTicketPreview()"
+                                    >
+                                        <option value="" disabled selected>Select College Year</option>
+                                        <option value="1st Year (Freshman)">1st Year (Freshman)</option>
+                                        <option value="2nd Year (Sophomore)">2nd Year (Sophomore)</option>
+                                        <option value="3rd Year (Junior)">3rd Year (Junior)</option>
+                                        <option value="4th Year (Senior)">4th Year (Senior)</option>
+                                        <option value="Postgraduate / Masters">Postgraduate / Masters</option>
+                                    </select>
+                                    <div class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-slate-400">
+                                        <i class="fa-solid fa-chevron-down text-xs"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Grid 3: Email Address & Preferred AI Track -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            
+                            <!-- Student Email -->
+                            <div class="space-y-2">
+                                <label for="studentEmail" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider">
+                                    College / Personal Email <span class="text-google-red">*</span>
+                                </label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                                        <i class="fa-solid fa-envelope text-sm"></i>
+                                    </div>
+                                    <input 
+                                        type="email" 
+                                        id="studentEmail" 
+                                        required 
+                                        placeholder="student@university.edu" 
+                                        class="w-full pl-10 pr-4 py-3 bg-slate-900/90 border border-slate-700 rounded-xl focus:ring-2 focus:ring-google-blue focus:border-google-blue outline-none text-slate-100 text-sm placeholder:text-slate-500 transition-all"
+                                        oninput="updateTicketPreview()"
+                                    >
+                                </div>
+                            </div>
+
+                            <!-- Swag Size -->
+                            <div class="space-y-2">
+                                <label for="swagSize" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider">
+                                    T-Shirt / Swag Size
+                                </label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                                        <i class="fa-solid fa-shirt text-sm"></i>
+                                    </div>
+                                    <select 
+                                        id="swagSize" 
+                                        class="w-full pl-10 pr-4 py-3 bg-slate-900/90 border border-slate-700 rounded-xl focus:ring-2 focus:ring-google-blue focus:border-google-blue outline-none text-slate-100 text-sm transition-all appearance-none cursor-pointer"
+                                    >
+                                        <option value="M">Medium (M)</option>
+                                        <option value="S">Small (S)</option>
+                                        <option value="L">Large (L)</option>
+                                        <option value="XL">Extra Large (XL)</option>
+                                    </select>
+                                    <div class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-slate-400">
+                                        <i class="fa-solid fa-chevron-down text-xs"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Track Interest Checkboxes -->
+                        <div class="space-y-2 pt-1">
+                            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider">
+                                Primary Interest Tracks (Select one or more)
+                            </label>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+                                <label class="flex items-center gap-2 p-2.5 rounded-xl bg-slate-900/80 border border-slate-800 cursor-pointer hover:border-google-blue/50 transition-colors text-xs">
+                                    <input type="checkbox" checked class="rounded bg-slate-800 border-slate-700 text-google-blue focus:ring-0">
+                                    <span>Gemini & LLMs</span>
+                                </label>
+                                <label class="flex items-center gap-2 p-2.5 rounded-xl bg-slate-900/80 border border-slate-800 cursor-pointer hover:border-google-blue/50 transition-colors text-xs">
+                                    <input type="checkbox" checked class="rounded bg-slate-800 border-slate-700 text-google-blue focus:ring-0">
+                                    <span>Computer Vision</span>
+                                </label>
+                                <label class="flex items-center gap-2 p-2.5 rounded-xl bg-slate-900/80 border border-slate-800 cursor-pointer hover:border-google-blue/50 transition-colors text-xs">
+                                    <input type="checkbox" class="rounded bg-slate-800 border-slate-700 text-google-blue focus:ring-0">
+                                    <span>Vertex AI Cloud</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Checkbox Agreement -->
+                        <div class="flex items-start gap-3 pt-2">
+                            <input type="checkbox" id="termsCheck" required class="mt-1 rounded bg-slate-800 border-slate-700 text-google-blue focus:ring-google-blue">
+                            <label for="termsCheck" class="text-xs text-slate-400 leading-relaxed cursor-pointer">
+                                I confirm I am a currently enrolled university student and agree to adhere to the <span class="text-google-blue hover:underline">Google Community Code of Conduct</span> during the event.
+                            </label>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button 
+                            type="submit" 
+                            id="submitBtn"
+                            class="w-full py-4 rounded-xl font-bold text-white text-base google-gradient-bg hover:opacity-95 shadow-xl shadow-google-blue/20 hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-3 group relative overflow-hidden"
+                        >
+                            <span class="relative z-10 flex items-center gap-2">
+                                <i class="fa-solid fa-bolt text-google-yellow group-hover:rotate-12 transition-transform"></i>
+                                Confirm Registration & Get VIP Pass
+                            </span>
+                            <div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                        </button>
+
+                    </form>
+                </div>
+
+                <!-- LIVE EVENT PASS PREVIEW CARD (Col 5) -->
+                <div class="lg:col-span-5 space-y-4">
+                    <div class="flex items-center justify-between px-1">
+                        <span class="text-xs font-mono font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+                            <span class="w-2 h-2 rounded-full bg-google-green animate-pulse"></span> Live Badge Preview
+                        </span>
+                        <span class="text-[11px] text-slate-500 font-mono">Updates dynamically</span>
+                    </div>
+
+                    <!-- Holographic Card -->
+                    <div id="ticketCard" class="ticket-card rounded-3xl p-6 border border-slate-700/80 relative overflow-hidden transition-all duration-300 google-border-glow">
+                        
+                        <!-- Top Header with Google Badge -->
+                        <div class="flex items-center justify-between border-b border-slate-700/60 pb-4 mb-5">
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-8 h-8 rounded-lg bg-slate-900 flex items-center justify-center border border-slate-700">
+                                    <i class="fa-brands fa-google text-google-blue text-sm"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-extrabold text-sm tracking-tight text-white">STUDENT AI SUMMIT</h4>
+                                    <p class="text-[10px] text-slate-400 font-mono">OFFICIAL DELEGATE PASS</p>
+                                </div>
+                            </div>
+                            <span class="px-2.5 py-1 rounded-full text-[10px] font-mono font-bold bg-google-green/20 text-google-green border border-google-green/30">
+                                CONFIRMED
+                            </span>
+                        </div>
+
+                        <!-- Delegate Info Grid -->
+                        <div class="space-y-4">
+                            
+                            <!-- Student Name -->
+                            <div>
+                                <span class="text-[10px] uppercase font-mono text-slate-400 block">Student Delegate</span>
+                                <div id="previewName" class="text-xl font-black text-white tracking-wide truncate">
+                                    Alex Morgan
+                                </div>
+                            </div>
+
+                            <!-- Details 2x2 Grid -->
+                            <div class="grid grid-cols-2 gap-3 pt-2">
+                                <div class="bg-slate-900/60 p-2.5 rounded-xl border border-slate-800">
+                                    <span class="text-[9px] uppercase font-mono text-slate-400 block">Student ID</span>
+                                    <span id="previewId" class="text-xs font-mono font-bold text-google-yellow truncate block">
+                                        2026-CS-8941
+                                    </span>
+                                </div>
+                                <div class="bg-slate-900/60 p-2.5 rounded-xl border border-slate-800">
+                                    <span class="text-[9px] uppercase font-mono text-slate-400 block">College Year</span>
+                                    <span id="previewYear" class="text-xs font-semibold text-slate-200 truncate block">
+                                        3rd Year
+                                    </span>
+                                </div>
+                                <div class="col-span-2 bg-slate-900/60 p-2.5 rounded-xl border border-slate-800">
+                                    <span class="text-[9px] uppercase font-mono text-slate-400 block">Department</span>
+                                    <span id="previewDept" class="text-xs font-semibold text-google-blue truncate block">
+                                        Computer Science & Eng.
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- QR Code & Barcode Section -->
+                            <div class="pt-4 border-t border-slate-700/60 flex items-center justify-between">
+                                <div class="space-y-1">
+                                    <span class="text-[9px] font-mono text-slate-400 block">VENUE & DATE</span>
+                                    <p class="text-xs font-medium text-slate-200">Main Tech Auditorium</p>
+                                    <p class="text-[10px] text-google-red font-mono font-semibold">OCTOBER 15, 2026 • 09:00 AM</p>
+                                </div>
+                                
+                                <!-- Simulated QR Code -->
+                                <div class="p-2 bg-white rounded-xl shadow-md border border-slate-300 flex items-center justify-center">
+                                    <img 
+                                        src="https://api.qrserver.com/v1/create-qr-code/?size=70x70&data=GOOGLE-AI-EVENT-DELEGATE-2026" 
+                                        alt="Event QR" 
+                                        class="w-14 h-14 object-contain"
+                                    >
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Subtle Chip Deco -->
+                        <div class="mt-4 pt-3 flex items-center justify-between text-[10px] font-mono text-slate-500 border-t border-slate-800">
+                            <span>SERIAL: GAI-9021-TX</span>
+                            <span class="flex items-center gap-1 text-slate-400">
+                                <i class="fa-solid fa-wifi text-[9px] text-google-green"></i> RFID ENABLED
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <!-- Pass Card Tips Box -->
+                    <div class="glass-card p-4 rounded-2xl border border-slate-800 text-xs text-slate-400 flex items-start gap-3">
+                        <i class="fa-solid fa-circle-info text-google-blue text-base mt-0.5"></i>
+                        <p>Your digital pass will be emailed immediately after registration. Please present the QR code at the event check-in desk for your free welcome kit!</p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- AI TRACKS & HIGHLIGHTS -->
+        <section id="tracks" class="py-16 px-4 lg:px-8 max-w-7xl mx-auto w-full border-t border-slate-800/80">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-xs font-mono font-bold text-google-red uppercase tracking-wider">Curated Learning Paths</span>
+                <h2 class="text-3xl font-extrabold mt-1">Explore Featured AI Tracks</h2>
+                <p class="text-slate-400 text-sm mt-2">Get hands-on building actual applications with Google's latest artificial intelligence frameworks.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <!-- Track 1 -->
+                <div class="glass-card p-6 rounded-2xl border border-slate-800 hover:border-google-blue/60 transition-all hover:-translate-y-1 group">
+                    <div class="w-12 h-12 rounded-xl bg-google-blue/10 border border-google-blue/30 text-google-blue flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-brain"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-white mb-2">Gemini & GenAI</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed mb-4">Master prompt engineering, multimodal fine-tuning, and embedding Gemini 1.5 into modern web apps.</p>
+                    <span class="text-[11px] font-mono text-google-blue font-semibold flex items-center gap-1">
+                        Track 01 • Hands-on Lab <i class="fa-solid fa-chevron-right text-[9px]"></i>
+                    </span>
+                </div>
+
+                <!-- Track 2 -->
+                <div class="glass-card p-6 rounded-2xl border border-slate-800 hover:border-google-red/60 transition-all hover:-translate-y-1 group">
+                    <div class="w-12 h-12 rounded-xl bg-google-red/10 border border-google-red/30 text-google-red flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-eye"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-white mb-2">Computer Vision</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed mb-4">Build real-time object recognition and spatial dynamic vision systems using MediaPipe & TensorFlow.</p>
+                    <span class="text-[11px] font-mono text-google-red font-semibold flex items-center gap-1">
+                        Track 02 • Project Workshop <i class="fa-solid fa-chevron-right text-[9px]"></i>
+                    </span>
+                </div>
+
+                <!-- Track 3 -->
+                <div class="glass-card p-6 rounded-2xl border border-slate-800 hover:border-google-yellow/60 transition-all hover:-translate-y-1 group">
+                    <div class="w-12 h-12 rounded-xl bg-google-yellow/10 border border-google-yellow/30 text-google-yellow flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-cloud"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-white mb-2">Vertex AI Cloud</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed mb-4">Learn cloud MLOps, model deployment, scalable pipelines, and enterprise-grade AI architecture.</p>
+                    <span class="text-[11px] font-mono text-google-yellow font-semibold flex items-center gap-1">
+                        Track 03 • Cloud Credits <i class="fa-solid fa-chevron-right text-[9px]"></i>
+                    </span>
+                </div>
+
+                <!-- Track 4 -->
+                <div class="glass-card p-6 rounded-2xl border border-slate-800 hover:border-google-green/60 transition-all hover:-translate-y-1 group">
+                    <div class="w-12 h-12 rounded-xl bg-google-green/10 border border-google-green/30 text-google-green flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-white mb-2">Autonomous Agents</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed mb-4">Develop intelligent reasoning agents capable of autonomous action using LangChain & Google Search API.</p>
+                    <span class="text-[11px] font-mono text-google-green font-semibold flex items-center gap-1">
+                        Track 04 • Hackathon Challenge <i class="fa-solid fa-chevron-right text-[9px]"></i>
+                    </span>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- AGENDA & SPEAKERS SECTION -->
+        <section id="schedule" class="py-16 px-4 lg:px-8 max-w-7xl mx-auto w-full border-t border-slate-800/80">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+                
+                <!-- Left: Interactive Schedule Timeline (Col 7) -->
+                <div class="lg:col-span-7 space-y-6">
+                    <div>
+                        <span class="text-xs font-mono font-bold text-google-yellow uppercase tracking-wider">Event Timeline</span>
+                        <h2 class="text-3xl font-extrabold mt-1">Summit Agenda</h2>
+                    </div>
+
+                    <div class="space-y-4">
+                        
+                        <!-- Timeline Item 1 -->
+                        <div class="glass-card p-4 sm:p-5 rounded-2xl border border-slate-800 flex items-start gap-4 hover:bg-slate-800/30 transition-colors">
+                            <span class="px-3 py-1.5 rounded-xl bg-google-blue/20 text-google-blue font-mono font-bold text-xs whitespace-nowrap">
+                                09:00 AM
+                            </span>
+                            <div>
+                                <h4 class="font-bold text-white text-sm">Keynote: The Horizon of Multimodal AI</h4>
+                                <p class="text-xs text-slate-400 mt-1">Opening ceremony by Google AI Developers team & Student Lead announcements.</p>
+                            </div>
+                        </div>
+
+                        <!-- Timeline Item 2 -->
+                        <div class="glass-card p-4 sm:p-5 rounded-2xl border border-slate-800 flex items-start gap-4 hover:bg-slate-800/30 transition-colors">
+                            <span class="px-3 py-1.5 rounded-xl bg-google-red/20 text-google-red font-mono font-bold text-xs whitespace-nowrap">
+                                10:30 AM
+                            </span>
+                            <div>
+                                <h4 class="font-bold text-white text-sm">Workshop: Building with Gemini APIs</h4>
+                                <p class="text-xs text-slate-400 mt-1">Interactive live coding session. Free $100 Google Cloud credits distributed to participants.</p>
+                            </div>
+                        </div>
+
+                        <!-- Timeline Item 3 -->
+                        <div class="glass-card p-4 sm:p-5 rounded-2xl border border-slate-800 flex items-start gap-4 hover:bg-slate-800/30 transition-colors">
+                            <span class="px-3 py-1.5 rounded-xl bg-google-yellow/20 text-google-yellow font-mono font-bold text-xs whitespace-nowrap">
+                                01:00 PM
+                            </span>
+                            <div>
+                                <h4 class="font-bold text-white text-sm">Networking Lunch & AI Swag Expo</h4>
+                                <p class="text-xs text-slate-400 mt-1">Complimentary food, drinks, Google t-shirt pickup, and tech booth interaction.</p>
+                            </div>
+                        </div>
+
+                        <!-- Timeline Item 4 -->
+                        <div class="glass-card p-4 sm:p-5 rounded-2xl border border-slate-800 flex items-start gap-4 hover:bg-slate-800/30 transition-colors">
+                            <span class="px-3 py-1.5 rounded-xl bg-google-green/20 text-google-green font-mono font-bold text-xs whitespace-nowrap">
+                                02:30 PM
+                            </span>
+                            <div>
+                                <h4 class="font-bold text-white text-sm">Student Hackathon & Project Showcase</h4>
+                                <p class="text-xs text-slate-400 mt-1">2-hour rapid AI prototype challenge with live judging and prizes for top 3 student teams!</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Right: Featured Keynote Mentors (Col 5) -->
+                <div class="lg:col-span-5 space-y-6">
+                    <div>
+                        <span class="text-xs font-mono font-bold text-google-green uppercase tracking-wider">Expert Speakers</span>
+                        <h2 class="text-3xl font-extrabold mt-1">Meet Mentors</h2>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
+                        
+                        <!-- Speaker 1 -->
+                        <div class="glass-card p-4 rounded-2xl border border-slate-800 flex items-center gap-4">
+                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80" alt="Speaker" class="w-14 h-14 rounded-xl object-cover border border-google-blue">
+                            <div>
+                                <h4 class="font-bold text-white text-sm">Dr. Elena Rostova</h4>
+                                <p class="text-xs text-google-blue font-medium">Principal AI Researcher, Google</p>
+                                <p class="text-[11px] text-slate-400 mt-0.5">Specialist in GenAI Architecture</p>
+                            </div>
+                        </div>
+
+                        <!-- Speaker 2 -->
+                        <div class="glass-card p-4 rounded-2xl border border-slate-800 flex items-center gap-4">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80" alt="Speaker" class="w-14 h-14 rounded-xl object-cover border border-google-red">
+                            <div>
+                                <h4 class="font-bold text-white text-sm">Marcus Vance</h4>
+                                <p class="text-xs text-google-red font-medium">Senior Developer Advocate, GDSC</p>
+                                <p class="text-[11px] text-slate-400 mt-0.5">Cloud ML & TensorFlow Evangelist</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- FAQ ACCORDION SECTION -->
+        <section id="faq" class="py-16 px-4 lg:px-8 max-w-4xl mx-auto w-full border-t border-slate-800/80">
+            <div class="text-center mb-10">
+                <span class="text-xs font-mono font-bold text-google-blue uppercase tracking-wider">Got Questions?</span>
+                <h2 class="text-3xl font-extrabold mt-1">Frequently Asked Questions</h2>
+            </div>
+
+            <div class="space-y-4">
+                
+                <details class="glass-card rounded-2xl border border-slate-800 p-5 group cursor-pointer">
+                    <summary class="font-semibold text-slate-200 flex items-center justify-between text-sm sm:text-base list-none">
+                        <span>Who is eligible to participate in this event?</span>
+                        <i class="fa-solid fa-chevron-down text-xs text-slate-400 group-open:rotate-180 transition-transform"></i>
+                    </summary>
+                    <p class="text-xs sm:text-sm text-slate-400 mt-3 leading-relaxed">
+                        Any student currently enrolled in an undergraduate or postgraduate program with a valid college ID number from any department or year is eligible to join!
+                    </p>
+                </details>
+
+                <details class="glass-card rounded-2xl border border-slate-800 p-5 group cursor-pointer">
+                    <summary class="font-semibold text-slate-200 flex items-center justify-between text-sm sm:text-base list-none">
+                        <span>Is there any registration fee?</span>
+                        <i class="fa-solid fa-chevron-down text-xs text-slate-400 group-open:rotate-180 transition-transform"></i>
+                    </summary>
+                    <p class="text-xs sm:text-sm text-slate-400 mt-3 leading-relaxed">
+                        No! The event is 100% FREE for all registered students. This includes workshop entry, food voucher, Google swags, and participation certificates.
+                    </p>
+                </details>
+
+                <details class="glass-card rounded-2xl border border-slate-800 p-5 group cursor-pointer">
+                    <summary class="font-semibold text-slate-200 flex items-center justify-between text-sm sm:text-base list-none">
+                        <span>What should I bring to the venue?</span>
+                        <i class="fa-solid fa-chevron-down text-xs text-slate-400 group-open:rotate-180 transition-transform"></i>
+                    </summary>
+                    <p class="text-xs sm:text-sm text-slate-400 mt-3 leading-relaxed">
+                        Please bring your personal laptop, charger, original College ID card, and your digital QR Event Pass generated on this website!
+                    </p>
+                </details>
+
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="mt-auto border-t border-slate-800 bg-slate-950/80 py-8 px-4 lg:px-8 text-center text-xs text-slate-500">
+            <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-2">
+                    <span class="font-bold text-slate-300">Google AI Student Summit</span>
+                    <span>•</span>
+                    <span>Organized by GDSC Campus Chapter</span>
+                </div>
+                <div class="flex items-center gap-4 text-slate-400 text-sm">
+                    <a href="#" class="hover:text-google-blue transition-colors"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#" class="hover:text-google-blue transition-colors"><i class="fa-brands fa-github"></i></a>
+                    <a href="#" class="hover:text-google-blue transition-colors"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#" class="hover:text-google-blue transition-colors"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+                <p>© 2026 Google AI Student Community. Built with Google AI.</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- SUCCESS REGISTRATION MODAL -->
+    <div id="successModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden transition-opacity duration-300">
+        <div class="glass-panel max-w-lg w-full rounded-3xl p-6 sm:p-8 border border-slate-700 shadow-2xl relative text-center space-y-6 animate-float">
+            
+            <!-- Modal Badge Icon -->
+            <div class="w-16 h-16 rounded-2xl google-gradient-bg flex items-center justify-center mx-auto text-white text-2xl shadow-xl shadow-google-blue/30">
+                <i class="fa-solid fa-check text-3xl"></i>
+            </div>
+
+            <!-- Modal Content -->
+            <div>
+                <h3 class="text-2xl font-black text-white">Registration Successful!</h3>
+                <p class="text-xs text-slate-300 mt-2">
+                    Congratulations <span id="modalStudentName" class="font-bold text-google-yellow">Alex</span>! Your delegate slot has been secured.
+                </p>
+            </div>
+
+            <!-- Pass Summary Box -->
+            <div class="bg-slate-900/90 rounded-2xl p-4 border border-slate-800 text-left space-y-2 text-xs font-mono">
+                <div class="flex justify-between border-b border-slate-800 pb-2">
+                    <span class="text-slate-400">Pass Code:</span>
+                    <span id="modalPassCode" class="text-google-blue font-bold">GAI-2026-8819</span>
+                </div>
+                <div class="flex justify-between border-b border-slate-800 pb-2">
+                    <span class="text-slate-400">Department:</span>
+                    <span id="modalDept" class="text-slate-200">Computer Science</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-slate-400">Student ID:</span>
+                    <span id="modalId" class="text-google-yellow">2026-CS-0891</span>
+                </div>
+            </div>
+
+            <p class="text-[11px] text-slate-400">
+                <i class="fa-solid fa-envelope-circle-check text-google-green"></i> A confirmation email with calendar invite has been sent to your inbox.
+            </p>
+
+            <!-- Actions -->
+            <div class="flex flex-col sm:flex-row gap-3">
+                <button onclick="downloadTicketPass()" class="flex-1 py-3 rounded-xl bg-google-blue text-white font-bold text-xs hover:bg-blue-600 transition-colors flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-download"></i> Save Digital Pass
+                </button>
+                <button onclick="closeSuccessModal()" class="px-5 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs transition-colors">
+                    Close
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Canvas Interactive Neural Background Engine
+        const canvas = document.getElementById('bgCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let width, height;
+        let particles = [];
+
+        function resizeCanvas() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        const googleColors = ['#4285F4', '#EA4335', '#FBBC05', '#34A853'];
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.radius = Math.random() * 2 + 1;
+                this.color = googleColors[Math.floor(Math.random() * googleColors.length)];
+                this.vx = (Math.random() - 0.5) * 0.8;
+                this.vy = (Math.random() - 0.5) * 0.8;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0 || this.x > width) this.vx *= -1;
+                if (this.y < 0 || this.y > height) this.vy *= -1;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < 45; i++) {
+            particles.push(new Particle());
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, width, height);
+
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < 110) {
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${0.12 - dist / 1100})`;
+                        ctx.lineWidth = 0.6;
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        // Live Ticket Updates as user types credentials
+        function updateTicketPreview() {
+            const nameInput = document.getElementById('fullName').value.trim();
+            const idInput = document.getElementById('studentId').value.trim();
+            const deptInput = document.getElementById('department').value;
+            const yearInput = document.getElementById('collegeYear').value;
+
+            document.getElementById('previewName').innerText = nameInput || 'Alex Morgan';
+            document.getElementById('previewId').innerText = idInput || '2026-CS-8941';
+            document.getElementById('previewDept').innerText = deptInput || 'Computer Science & Eng.';
+            document.getElementById('previewYear').innerText = yearInput ? yearInput.split(' ')[0] + ' ' + (yearInput.split(' ')[1] || '') : '3rd Year';
+        }
+
+        // Synthetic Web Audio API Audio Chime
+        function playSuccessAudio() {
+            try {
+                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5
+                osc.frequency.exponentialRampToValueAtTime(659.25, audioCtx.currentTime + 0.1); // E5
+                osc.frequency.exponentialRampToValueAtTime(783.99, audioCtx.currentTime + 0.2); // G5
+                osc.frequency.exponentialRampToValueAtTime(1046.50, audioCtx.currentTime + 0.35); // C6
+
+                gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.45);
+
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.45);
+            } catch(e) {
+                console.log("Audio play suppressed or unsupported.");
+            }
+        }
+
+        // Form Submission & Celebration Handler
+        function handleRegistration(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('fullName').value.trim();
+            const studentId = document.getElementById('studentId').value.trim();
+            const dept = document.getElementById('department').value;
+
+            // Update modal info
+            document.getElementById('modalStudentName').innerText = name;
+            document.getElementById('modalStudentName').classList.add('google-gradient-text');
+            document.getElementById('modalDept').innerText = dept;
+            document.getElementById('modalId').innerText = studentId;
+
+            const randomCode = 'GAI-2026-' + Math.floor(1000 + Math.random() * 9000);
+            document.getElementById('modalPassCode').innerText = randomCode;
+
+            // Trigger Confetti Explosion
+            confetti({
+                particleCount: 120,
+                spread: 80,
+                origin: { y: 0.6 },
+                colors: googleColors
+            });
+
+            playSuccessAudio();
+
+            // Show Success Modal
+            const modal = document.getElementById('successModal');
+            modal.classList.remove('hidden');
+
+            // Decrement remaining seats counter
+            const counter = document.getElementById('seatsCounter');
+            let currentSeats = parseInt(counter.innerText.split(' ')[0]);
+            if (currentSeats > 1) {
+                counter.innerText = `${currentSeats - 1} / 500`;
+            }
+        }
+
+        function closeSuccessModal() {
+            document.getElementById('successModal').classList.add('hidden');
+        }
+
+        function downloadTicketPass() {
+            alert("Digital Event Pass downloaded! Keep your Pass Code ready at check-in.");
+            closeSuccessModal();
+        }
+
+        // Event Countdown Clock Logic
+        const targetDate = new Date();
+        targetDate.setDate(targetDate.getDate() + 8); // 8 days in future
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const difference = targetDate - now;
+
+            if (difference > 0) {
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                document.getElementById('cd-days').innerText = String(days).padStart(2, '0');
+                document.getElementById('cd-hours').innerText = String(hours).padStart(2, '0');
+                document.getElementById('cd-mins').innerText = String(minutes).padStart(2, '0');
+                document.getElementById('cd-secs').innerText = String(seconds).padStart(2, '0');
+            }
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+</html>
